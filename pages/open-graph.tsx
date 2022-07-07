@@ -17,7 +17,7 @@ export default function Page() {
 
   return (
     <>
-      <NextSeo noindex nofollow disableGooglebot />
+      <NextSeo noindex nofollow />
       <Box position="relative" padding="20" color="gray.100" style={{ width: 1200, height: 630 }}>
 
         <Stack spacing="2">
