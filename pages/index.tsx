@@ -33,6 +33,7 @@ export default function HomePage() {
 
             <Box maxWidth={{ lg: '40rem' }} marginRight="14">
             <Heading
+              as="h1"
               lineHeight="1"
               fontSize={{ base: '3.125rem', md: '3rem', lg: '4.25rem' }}
               letterSpacing="tight"
