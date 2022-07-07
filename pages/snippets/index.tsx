@@ -39,7 +39,7 @@ export default function Page() {
         </Box>
         <Box className="section">
           <Box className="wrapper">
-          <SimpleGrid columns={{ base: 1, md: 3 }} direction="column" spacing="10">
+          <SimpleGrid columns={{ base: 1, md: 3 }} spacing="10">
             {search.results.map((snippet) => (
               <SnippetCard key={snippet.title} data={snippet} />
             ))}
