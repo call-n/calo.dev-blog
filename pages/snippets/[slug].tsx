@@ -16,7 +16,7 @@ export default function Page({ snippet }: { snippet: Snippet }) {
 
   return (
     <Container>
-      <SEO title={snippet.title} description={snippet.description} />
+      <SEO title={snippet.title} description={snippet.description} image={snippet.logo} />
       <Box className="section">
         <article className="wrapper">
           <Box marginBottom="6">

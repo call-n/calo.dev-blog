@@ -22,7 +22,7 @@ export default function BlogPage({ blog, ogImageUrl }: { blog: Blog; ogImageUrl:
   return (
     <Container>
       <SEO
-        image={ogImageUrl}
+        image={blog.image}
         title={blog.title}
         description={blog.description}
         post={{ date: date.iso, tags: blog.tags }}
