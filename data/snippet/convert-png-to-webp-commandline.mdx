@@ -1,0 +1,27 @@
+---
+title: How to convert a .png file to a .webp using the commandline
+description: This will give you the chance to convert a .png file to .webp when ever you want without using a 3rd party website.
+logo: /static/logos/bash.png
+categories: ['homebrew', 'bash', 'image convertion', 'image optimisation']
+---
+
+First of you will need to install webp thru you commandline using this command
+
+```bash
+brew install webp
+```
+
+After that you will need to `cd` into the directory that you image resides. And after that you will need to write this command.
+
+```bash
+cwebp -q 80 example.png -o example.webp
+```
+
+`cwebp` stands for compression of the file.
+
+`-q` is the flag for declaring the quality of the image were you will enter a number from 1 to 100. Google recommends that you atleast have a quality value of 80.
+
+`example.webp` is were you state the image file you want to convert.
+
+`-o` is used for declaring what the output should be of the `cwebp` command.
+So if you write `-o example.webp` you will get a image with the file name example.webp but if you want it to go elsewere in your filesystem just write the disired path.

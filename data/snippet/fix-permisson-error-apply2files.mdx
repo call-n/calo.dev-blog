@@ -1,0 +1,22 @@
+---
+title: Fix permission with apply2files - /usr/local/lib/docker/cli-plugins
+description: This command will update the permissions for your usr/local/*
+logo: /static/logos/homebrew.webp
+categories: ['homebrew']
+---
+
+I think in my case this is because when i deleted docker and updated to the latest version of macOS and it did something to my permissions. Take this command and set your usr in the MYUSRNAME within the curlybrackets.
+
+```bash
+sudo chown -R $(MYUSRNAME):admin /usr/local/* \&& sudo chmod -R g+rwx /usr/local/*
+```
+
+Once you've got brew running again just run this command and wait, it will reinstall all your packages.
+
+```bash
+brew list | xargs brew reinstall.
+```
+
+Then you should be all set again
+
+>If not you can read futher [here](https://github.com/Homebrew/homebrew-core/issues/45009#issuecomment-543795948)

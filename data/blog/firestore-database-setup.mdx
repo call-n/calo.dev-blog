@@ -1,0 +1,71 @@
+---
+title: Firestore database setup, on the cloud (Firebase)
+description: How we setup Firestore, collections and documents on the cloud.
+publishedAt: 2022-07-07
+image: /static/images/firestorebanner.webp
+tags: ['Firebase', 'Firestore', 'Cloud service', 'Google Products']
+featured: true
+---
+
+This is an article about the setup for `Firebase Firestore` in the cloud and the setup or integration of Firebase in your project. It's easier than you may think. 😉
+
+## The Firestore Setup
+
+When you've entered Firebase you should navigate to the Firestore database under the `Build tab` and be greeted by this view.
+
+![Firestore adminpanel](/static/images/firestore.webp)
+
+Then you want to proceed to click on the create database button and this image pops up.
+
+![Firestore database creation](/static/images/create-database.webp)
+
+You will get two choices and that is to start in `Production mode` or in `Test mode`. This is security rules for your database and you should choose accordingly.
+
+### Production Mode for database
+
+This means that no one has access to the database this is including our own frontend application 😬. You need to declare your own set of rules who can access the database (read, write). Not sutable for development as you can imagine.
+
+### Test Mode For database
+
+This means that anyone who knows about our database can access the data. Not to worry this wont effect anything, perfect for `testing` and `developing` as you may have figured out.
+
+>Not to worry, I will come back to this to tell you more about security rules on the database.
+
+### Once you've entered the database mode you want
+
+This should be the what appears and now you just have to choose the closest location to where you think your users will come from. Then click enable and your datebase will start to be created.
+
+![Firestore database location](/static/images/choose-location.webp)
+
+When your database has finished you will come to a page that looks something like this. 
+
+![Firestore database location](/static/images/firebase-interface.webp)
+
+On this panel you are able to see all you data and so much as create your data from here.
+
+And as you see you are able to start a collection, then you ask `what is an collection`?
+
+An `collection` in Firestore is a collection that groups documents together, or records if you prefer that term. In sql terms in would be the same as an table.
+
+Then how do we `use our colletion`, we use it for every unique type of data in our collection. 
+
+As an `example` a collection for Sodas or Fruits, it's like a grouping of an type of item, coca-cola and fanta goes under the soda collection and share the same traits. As for fruits, orange and an apple
+
+## How to create a collection and items
+
+The creation of an collection is as easy as just clicking the `+ start collection`. There after this should pop up:
+
+![Firestore database creating a collection](/static/images/create-collection.webp)
+
+And now we just add the new type of data that we want, the `collection ID`.
+When we are satisfied with our ID we move on to adding the first document, so that we get the required fields in the template of our collection.
+
+The layout will look something like this were you add the desired fields and just fill out the first one with some values.
+
+I strongly advice that you use the `Auto-ID` instead of typing your own, you can see it in the image below that there is a button for `Auto-ID`, click it.
+
+![Firestore database creating fields in collection](/static/images/collection-fields.webp)
+
+Then when you feel like you have everything you need just click save and your first document is created!
+
+>Well done if you've made it this far, this was all for the simple setup of Firebase Firestore

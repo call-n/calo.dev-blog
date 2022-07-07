@@ -1,0 +1,7 @@
+node_modules
+.next/
+.contentlayer
+.DS_Store
+.swc
+package-lock.json
+.env

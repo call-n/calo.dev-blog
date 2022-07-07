@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://calo.dev</loc>
+  </url>
+
+  <url>
+    <loc>https://calo.dev/open-graph</loc>
+  </url>
+
+  <url>
+    <loc>https://calo.dev/blog/firebase-setup</loc>
+  </url>
+
+  <url>
+    <loc>https://calo.dev/blog/firestore-database-setup</loc>
+  </url>
+
+  <url>
+    <loc>https://calo.dev/project/00-nzcasino</loc>
+  </url>
+
+  <url>
+    <loc>https://calo.dev/project/01-ect</loc>
+  </url>
+
+  <url>
+    <loc>https://calo.dev/snippet/add-image-to-markdown</loc>
+  </url>
+
+  <url>
+    <loc>https://calo.dev/snippet/convert-png-to-webp-commandline</loc>
+  </url>
+
+  <url>
+    <loc>https://calo.dev/snippet/fix-permisson-error-apply2files</loc>
+  </url>
+
+  <url>
+    <loc>https://calo.dev/snippet/functional-component-shortcut</loc>
+  </url>
+
+  <url>
+    <loc>https://calo.dev/snippet/homebrew-cheatsheet</loc>
+  </url>
+
+  <url>
+    <loc>https://calo.dev/review/example</loc>
+  </url>
+</urlset>
