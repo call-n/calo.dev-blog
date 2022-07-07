@@ -15,7 +15,6 @@ export function BlogCard(props: BlogCardProps) {
   const { title, publishedAt, image, readingTime, slug, tags, description } = data;
   const date = formatDate(publishedAt);
 
-  console.log(tags)
   return (
     <LinkBox 
       as="article" 
