@@ -7,7 +7,7 @@ export const tags = [
 
 const shared = {
   name: 'call-n',
-  repo: 'https://github.com/call-n/calodev',
+  repo: 'https://github.com/call-n/calo.dev-blog',
   editUrl: 'https://github.com/call-n/calo.dev-blog/tree/main/data',
   website: 'https://calo.dev',
   title:
