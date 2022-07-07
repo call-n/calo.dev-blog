@@ -8,7 +8,7 @@ export const tags = [
 const shared = {
   name: 'call-n',
   repo: 'https://github.com/call-n/calodev',
-  editUrl: 'https://github.com/call-n/calodev/tree/main/data',
+  editUrl: 'https://github.com/call-n/calo.dev-blog/tree/main/data',
   website: 'https://calo.dev',
   title:
     'call-n - Software Engineer, Designer and Gamer, lol',
