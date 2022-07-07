@@ -106,7 +106,7 @@ function Headshot() {
     <Flex flexWrap="nowrap" gap="5px" justifyContent="flex-start" alignItems="center">
       <Link href="/" passHref>
         <a style={{height: "25px"}}>
-          <Image src="/static/images/sitelogo1.png" alt="Logo for the site" width="125" height="25" />
+          <Image src="/static/images/sitelogo1.webp" alt="Logo for the site" width="125" height="25" />
         </a>
       </Link>
     </Flex>
