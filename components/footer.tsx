@@ -57,6 +57,9 @@ export default function Footer() {
             <Flex direction="column" gap="4">
               <FooterLink href="/blog/firebase-setup">Firebase setup</FooterLink>
               <FooterLink href="/blog/firestore-database-setup">Firestore setup</FooterLink>
+              <FooterLink href="/blog/custom-real-time-data-hook">Real-time data hook</FooterLink>
+              <FooterLink href="/blog/firebase-database-fetch">Firestore data fetching</FooterLink>
+              <FooterLink href="/blog/firebase-setup-code">Firestore setup in code</FooterLink>
             </Flex>
           </GridItem>
         </SimpleGrid>
