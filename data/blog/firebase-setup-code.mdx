@@ -1,0 +1,94 @@
+---
+title: How to setup Firebase in your code
+description: How we setup Firebase connect to our firebase project from our code.
+publishedAt: 2022-07-18
+image: /static/images/setupfirebasereact.webp
+tags: ['Firebase', 'React.js']
+featured: true
+---
+
+This will be a short summary of how you connect your react project to the Firebase Cloud. If you want to see the code on `Github` [this](https://github.com/call-n/example-firebase) is the link to the example ☺️.
+
+## Connect to firebase in react
+
+First of all you will need to install the npm firebase package.
+```bash
+npm install firebase
+```
+
+After that you want to head to your project in Firebase, if you have not made a project yet you should check out my other article on [How to setup Firebase projects](https://calo.dev/blog/firebase-setup). 
+
+You should get a view like the image below and you want to click on the button that looks like `</>`. This is the first step in connecting your frontend application to Firebase.
+
+![Firebase project view](/static/images/registerwebapp.webp)
+
+When the `</>` button is clicked a view like the one below will show up. It ask you for a nickname for you application, that one is complitely up to you!
+
+![Nickname your application](/static/images/nicknameapp.webp)
+
+There is a button for Firebase hosting too, for now just skip that and click register app.
+
+> I will add a article for firebase hosting, be patient ☺️.
+
+When your app is registered this view below will pop up.
+
+![Application is registered](/static/images/appregistered.webp)
+
+Now we have our app registered, just return to the console (the page we started of on).
+
+Under the name of your project you should now be able to see 1 app. Click on that one and this will show up as in the image below.
+
+![Application showcase](/static/images/appshow.webp)
+
+Click the cog for settings and you will be navigated to the project settings. Scroll down until you see this view.
+
+![Application config](/static/images/appconfig.webp)
+
+Here you will have everything for Firebase to connect to your frontend app. Don't forget to click the `config` button instead of `npm`. When we click the config button we just get a object, all we need for now. Looks something like this:
+
+```js
+const firebaseConfig = {
+  apiKey: "AIzaSyC87utLU93uTFRaXCLUVmEDLkn9JBl_px4",
+  authDomain: "example-fac5e.firebaseapp.com",
+  projectId: "example-fac5e",
+  storageBucket: "example-fac5e.appspot.com",
+  messagingSenderId: "1043671646322",
+  appId: "1:1043671646322:web:ce7c55c505179e9e3242eb"
+};
+```
+
+All this info will be public but not to worry, this is for firebase to identify and connect to your app. And you will be able to lock down your data later on. As I will show in a article on security rules (comming soon).
+
+> Now all the configuration on the cloud is finished, let's go to the code editor.
+
+## Coding the Firebase connecting
+
+First of you want to create a new folder in you `/src` folder with the name `Firebase`. This is not necessary, but it's the easiest way to keep track of Firebase. Inside the `/Firebase` add a new file with the name `config.js`.
+
+This file should look like this:
+
+```js:/src/Firebase/config.js
+import { initializeApp } from "firebase/app";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC87utLU93uTFRaXCLUVmEDLkn9JBl_px4",
+  authDomain: "example-fac5e.firebaseapp.com",
+  projectId: "example-fac5e",
+  storageBucket: "example-fac5e.appspot.com",
+  messagingSenderId: "1043671646322",
+  appId: "1:1043671646322:web:ce7c55c505179e9e3242eb"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+```
+
+And there you have your connection! 
+
+When you want to use other services just export them from this file with this line of code in the bottom of the file:
+
+```js
+export { theServiceYouWant }
+```
+
+> There we have everything to register and connect an frontend app to Firebase, if you want to read more on how to setup a database in firebase read this article about [Firestore database setup, on the cloud (Firebase)](https://calo.dev/blog/firestore-database-setup)

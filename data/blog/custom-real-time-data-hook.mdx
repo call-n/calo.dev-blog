@@ -1,0 +1,151 @@
+---
+title: Build a custom Firebase real-time data hook for firebase
+description: This article shows how to build a real-time data hook for Firebase and a quick walkthrough what realtime data is.
+publishedAt: 2022-07-18
+image: /static/images/realtimedatahook.webp
+tags: ['Firebase', 'Firestore', 'React.js']
+---
+
+This article shows how to build a real-time data hook for Firebase and a quick walkthrough what realtime data is. This example is in React.js. All code is found on [GitHub](https://github.com/call-n/example-firebase) for reference.
+
+## What is real-time data?
+
+Real-time data is pretty simple acually. The data is stored as JSON and in a noSQL cloud database and the data is synced across all client in realtime. It even remains available if your app goes offline. 
+
+## Then how do we build our custom hook?
+
+First of you should create a new directory in your /src with the name `hooks`. In this directory all custom hooks should reside.
+
+When you have create the directory, create a file with the name useCollection.js. In this file write the following:
+
+```js:/src/hooks/useCollection.js
+import { useState, useEffect } from 'react'
+import { db } from '../Firebase/config'
+
+export const useCollection = () => {
+    // let's build the hook
+}
+```
+
+First of we need to import the necessary modules from `firebase/firestore` like this:
+
+```js
+//imports from firestore
+import { collection, onSnapshot } from 'firebase/firestore'
+```
+
+`collection` takes two parameters, if you are not sure what this is you can read my other article for the simpler approach to fetching data in [How to fetch from the database in Firebase](https://calo.dev/blog/firebase-database-fetch)
+
+`onSnapshot` takes one parameter and it's the query we give it, in this case the `collection` is the query. Very similar to the [getDocs](https://firebase.google.com/docs/firestore/query-data/get-data) function but onSnapshot has an callback that fires every time the data changes on the database.
+
+Moving on to the next step we write the state we are going to save the documents in and the useEffect for fetching the documents:
+
+```js
+const [documents, setDocuments] = useState(null)
+
+useEffect(() => {
+    // fetch data
+}, [])
+```
+
+The next part is very similar to the simple way to setup fetch with firebase that i display in [this article](https://calo.dev/blog/firebase-database-fetch). However, there is some changes:
+
+```js
+const [documents, setDocuments] = useState(null)
+
+useEffect(() => {
+        let query = collection(db, c)
+
+        const unsub = onSnapshot(query, (snapshot) => {
+            let results = []
+            snapshot.docs.forEach(doc => {
+            results.push({id: doc.id, ...doc.data()})
+            })
+            setDocuments(results)
+        })
+
+        return () => unsub()
+    }, [c])
+```
+
+First of we set our query with the db and the `c` in this context is the `collection name` we want to fetch, just to make it a little bit more dynamic.
+
+The rest is more or less the same as we had before with the exeption of the callback, it runs once on mount and then every time the data updates on the database. 
+
+This mean that we are listening to the event and there after we need to do some cleanup when this component thats using it unmount with:
+
+```js
+const [documents, setDocuments] = useState(null)
+
+useEffect(() => {
+    const unsub = {onSnapshotLister}
+    
+    return () => unsub() // cleans up the listner when unmounted
+}, [])
+```
+
+After this we should have our finished hook and we are ready to use it, final code:
+
+```js:/src/hooks/useCollection.js
+import { useState, useEffect } from 'react'
+import { db } from '../Firebase/config'
+
+//imports from firestore
+import { collection, onSnapshot } from 'firebase/firestore'
+
+export const useCollection = (c) => {
+    const [documents, setDocuments] = useState(null)
+
+    useEffect(() => {
+        let query = collection(db, c)
+
+        const unsub = onSnapshot(query, (snapshot) => {
+            let results = []
+            snapshot.docs.forEach(doc => {
+            results.push({id: doc.id, ...doc.data()})
+            })
+            setDocuments(results)
+        })
+
+        return () => unsub()
+    }, [c])
+
+    return { documents }
+}
+```
+
+Don't forget to add the `c` as a parameter in the useCollection function!
+
+And now for using the hook, we just reuse the same code we had before in our simple fetching verison. You just need to import it and declare which collection you want then everytime you add, remove or change a document it will update.
+
+```js:/src/App.js
+import { useCollection } from './hooks/useCollection'
+
+function App() {
+  const { documents: sodas } = useCollection('sodas')
+  
+  console.log(sodas)
+
+  return (
+    <div className="App">
+      lol
+    </div>
+  );
+}
+
+export default App;
+```
+
+expected output should look something like this:
+
+```json5
+Array(3) [ {…}, {…}, {…} ]
+0: Object { id: "0Odgq1LVVygYaQNUrtOa", size: 0.75, title: "sprite" }
+1: Object { id: "OXWjcMPsQbz5QXhTJWQY", size: 0.5, title: "fanta" }
+2: Object { id: "zF57LMh73uPs0K1tf0tD", size: 1.5, title: "coca-cola" }
+length: 3
+```
+
+> And now you've made the custom real-time data hook for react.js, well done! All code is on [Github](https://github.com/call-n/example-firebase) if you want to check it out ☺️.
+
+
