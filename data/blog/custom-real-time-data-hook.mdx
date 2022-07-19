@@ -1,7 +1,7 @@
 ---
 title: Build a custom Firebase real-time data hook for firebase
 description: This article shows how to build a real-time data hook for Firebase and a quick walkthrough what realtime data is.
-publishedAt: 2022-07-18
+publishedAt: 2022-07-19
 image: /static/images/realtimedatahook.webp
 tags: ['Firebase', 'Firestore', 'React.js']
 ---
@@ -10,7 +10,7 @@ This article shows how to build a real-time data hook for Firebase and a quick w
 
 ## What is real-time data?
 
-Real-time data is pretty simple acually. The data is stored as JSON and in a noSQL cloud database and the data is synced across all client in realtime. It even remains available if your app goes offline. 
+Real-time data is pretty simple acually. The data is stored as `JSON` and in a `noSQL` cloud database and the data is synced across all client in realtime. This means that every client that's connected have a direct link to the server and communicates when there is an update in the database. It even remains available if your app goes offline. 
 
 ## Then how do we build our custom hook?
 
@@ -48,7 +48,7 @@ useEffect(() => {
 }, [])
 ```
 
-The next part is very similar to the simple way to setup fetch with firebase that i display in [this article](https://calo.dev/blog/firebase-database-fetch). However, there is some changes:
+The next part is very similar to the setup of fetch with firebase that I displayed in [this article](https://calo.dev/blog/firebase-database-fetch). However, there are some changes:
 
 ```js
 const [documents, setDocuments] = useState(null)
@@ -68,11 +68,11 @@ useEffect(() => {
     }, [c])
 ```
 
-First of we set our query with the db and the `c` in this context is the `collection name` we want to fetch, just to make it a little bit more dynamic.
+First of we set our `query` with the db and the `c` in this context is the `collection name` we want to fetch, we do this instead of writing a static collection name to make it a bit more dynamic.
 
 The rest is more or less the same as we had before with the exeption of the callback, it runs once on mount and then every time the data updates on the database. 
 
-This mean that we are listening to the event and there after we need to do some cleanup when this component thats using it unmount with:
+This mean that we are listening to the event and there after we need to do some cleanup when this component thats using it unmounts:
 
 ```js
 const [documents, setDocuments] = useState(null)
@@ -116,7 +116,7 @@ export const useCollection = (c) => {
 
 Don't forget to add the `c` as a parameter in the useCollection function!
 
-And now for using the hook, we just reuse the same code we had before in our simple fetching verison. You just need to import it and declare which collection you want then everytime you add, remove or change a document it will update.
+And now for using the hook, we just reuse the same template we had before in our simple fetching verison. You just need to import it and declare which collection you want then everytime you add, remove or change a document it will update.
 
 ```js:/src/App.js
 import { useCollection } from './hooks/useCollection'
