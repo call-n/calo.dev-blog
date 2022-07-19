@@ -60,7 +60,7 @@ const Blog = defineDocumentType(() => ({
 
 const Review = defineDocumentType(() => ({
   name: 'Review',
-  filePathPattern: 'review/*.mdx',
+  filePathPattern: 'reviews/*.mdx',
   contentType: 'mdx',
   fields: {
     featured: { type: 'boolean' },
@@ -78,7 +78,7 @@ const Review = defineDocumentType(() => ({
 
 const Snippet = defineDocumentType(() => ({
   name: 'Snippet',
-  filePathPattern: 'snippet/**/*.mdx',
+  filePathPattern: 'snippets/**/*.mdx',
   contentType: 'mdx',
   fields: {
     title: { type: 'string', required: true },
@@ -91,7 +91,7 @@ const Snippet = defineDocumentType(() => ({
 
 const Project = defineDocumentType(() => ({
   name: 'Project',
-  filePathPattern: 'project/*.mdx',
+  filePathPattern: 'projects/*.mdx',
   contentType: 'mdx',
   fields: {
     featured: { type: 'boolean' },
