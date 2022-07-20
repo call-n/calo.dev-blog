@@ -1,0 +1,60 @@
+---
+title: How to build a custom logout hook in React.js (Firebase auth)
+description: This article shows how to code a custom hook for loggin out a user in Firebase with React.js.
+publishedAt: 2022-07-20
+image: /static/images/firebaseauth.webp
+tags: ['Firebase', 'Firestore', 'React.js', 'Auth', 'Custom-Hook']
+---
+
+This article shows how to code a custom hook for loggin out a user in Firebase with React.js. Code is found on [GitHub](https://github.com/call-n/example-firebase) for reference. 
+
+[Click here to get to final solution](#finished-code)
+
+> You need to configure your Firebase `config.js` file before you can procced with this article, [click here](https://calo.dev/blog/setup-authentication-firebase) if that's the case.
+
+## How to build custom logout hook
+
+First of start by adding a new file to the `/hook` directory called `useLogout.js`. Add the following code for a code template and the imports.
+
+```js
+// import the firebase functions
+import { auth } from '../Firebase/config'
+import { signOut } from "firebase/auth";
+
+export const useLogout = () => {
+    // rest of logic for hook
+}
+```
+
+`auth` in this context is a token that every logged in user gets. When we want to do something to their session/token we call the auth object. 
+
+`signOut` takes one argument, the `auth` object. It has all the necessary information that Firebase needs to `logout` the user from their session.
+
+As you can image this custom hook is nothing complicated.
+
+### Finished code
+
+```js:/src/hooks/useLogout.js
+// import the firebase functions
+import { auth } from '../Firebase/config'
+import { signOut } from "firebase/auth";
+
+export const useLogout = () => {
+
+    const logout = () => {
+        signOut(auth)
+            .then(() => {
+                console.log('User signed out')
+            })
+            .catch((err) => {
+                console.log(err.message)
+            })
+    }
+
+    return { logout }
+}
+```
+
+We just call the `signOut` function from Firebase and send thru the `auth` object and it's finished.
+
+> Well done, this article wasn't to much text as the one before. If you want to continue to the custom react hook we build for loggin in the user click [here](https://calo.dev/blog/firebase-login-custom-hook) ←😁.

@@ -1,0 +1,118 @@
+---
+title: How to build a custom signup hook in React.js (Firebase auth)
+description: This article shows how to build a custom hook in React.js for signup in Firebase authentication.
+publishedAt: 2022-07-20
+image: /static/images/firebaseauth.webp
+tags: ['Firebase', 'Firestore', 'React.js', 'Auth', 'Custom-Hook']
+---
+
+This article shows how to build a custom hook in React.js for `signup` in Firebase authentication. Code is found on [GitHub](https://github.com/call-n/example-firebase) for reference. 
+
+[Click here to get to final solution](#finished-code)
+
+> You need to configure your Firebase `config.js` file before you can procced with this article, [click here](https://calo.dev/blog/setup-authentication-firebase) if that's the case.
+
+## How to build custom signup hook
+
+First of you should navigate to your `/hooks` directory or if you've placed them elsewhere and create a new file called `useSignup.js`. Use this code as a start template:
+
+```js:/src/hooks/useSignup.js
+import { useState } from 'react'
+
+export const useSignup = () => {
+    // more to come... :)
+}
+```
+
+We also need to import the necessary modules from `firebase/firestore` and our config like this:
+
+```js
+// import the firebase modules and our config
+import { auth } from '../Firebase/config'
+import { createUserWithEmailAndPassword } from "firebase/auth";
+```
+
+`auth` is a reference to the server, very similar to the `db` we used the database functions.
+
+`createUserWithEmailAndPassword` mostly explains it self, create a `user` with `email` and `passaword`. It takes 3 arguments and that is the `auth` object, user and an email.
+
+Then on to building it out some more, we need a state for error, a function called `signup` that we want to export for usage in other compontent and that looks something like this:
+
+```js
+import { useState } from "react";
+
+export const useSignup = () => {
+    const [error, setError] = useState(null)
+
+    const signup = () => {
+        // signup logic
+    }
+
+    return { error, signup }
+}
+```
+
+Then we will write the `signup` function:
+
+```js
+const signup = (email, password) => {
+    setError(null) 
+    createUserWithEmailAndPassword(auth, email, password)
+        .then((res) => {
+            console.log('User signed up:', res.user)
+        })
+        .catch((err) => {
+            setError(err.message)
+        })
+}
+```
+
+`createUserWithEmailAndPassword` has 3 parameter as I told you before and when that promise has returned we get back the `res`, in other word, respons. This just tells us if it worked if not we use the `.catch` method and `setError` with the `error.message`.
+
+Nothing too complicated really! Here is the finished custom hook.
+
+### Finished code
+
+```js:/src/hooks/useSignup
+import { useState } from "react";
+
+// import the firebase functions
+import { auth } from '../Firebase/config'
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
+export const useSignup = () => {
+    const [error, setError] = useState(null)
+
+    const signup = (email, password) => {
+        setError(null) 
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((res) => {
+                console.log('User signed up:', res.user)
+            })
+            .catch((err) => {
+                setError(err.message)
+            })
+    }
+
+    return { error, signup }
+}
+```
+
+Now for all this to work we need a Form with email and password and then use our `signup` function that we import to our component like this:
+
+```js
+import { useSignup } from '../hooks/useSignup'
+
+export default function Signup() {
+    //...
+    const { error, signup } = useSignup()
+    
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        signup(email, password)
+    }
+//...
+```
+
+> Well done, that was all for the signup hook! Continue reading more about the [login](https://calo.dev/blog/firebase-login-custom-hook) and [logout](https://calo.dev/blog/firebase-logout-custom-hook) custom hook.
