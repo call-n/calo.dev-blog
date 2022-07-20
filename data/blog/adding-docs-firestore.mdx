@@ -1,0 +1,192 @@
+---
+title: How to add documents in Firestore
+description: This article shows how to code and use Firebase to add documents to the Firestore database.
+publishedAt: 2022-07-19
+image: /static/images/firestoreadd.webp
+tags: ['Firebase', 'Firestore', 'React.js']
+---
+
+This article shows how to code and use Firebase to add documents to the Firestore database. This example is in React.js. All code is found on [GitHub](https://github.com/call-n/example-firebase) for reference.
+
+## How to add documents in Firestore
+
+We start of with making a form in react, I recommend that you make a new directory called `/compontents`, if it's not already there! In this directory all the compontents of your application should reside.
+
+There after we create a file called `Form.jsx`. This file will be imported into `App.js` for later use. 
+
+The Form file to start of will look something like this, were we already have imported the necessary firebase functions.
+
+```jsx:/src/components/Form.jsx
+import { useState } from 'react'
+
+// imports from firebase
+import { db } from '../Firebase/config'
+import { collection, addDoc } from 'firebase/firestore'
+
+export default function Form() {
+    return(
+        <div>
+            lol
+        </div>
+    )
+}
+```
+
+`collection` just declares which collection we want to opt into, if you are not sure what this does I recommend that you read more about it [here](https://calo.dev/blog/firebase-database-fetch).
+
+`addDoc` takes two values, first one being the reference to the collection then the object that we want to save. The new document is the object.
+
+Now we need to write some `states` for the input fields and the function that will catch the sumbit, `handleSubmit`:
+
+```jsx
+import { useState } from 'react'
+
+// imports from firebase
+import { db } from '../Firebase/config'
+import { collection, addDoc } from 'firebase/firestore'
+
+export default function Form() {
+    const [newSodaName, setNewSodaName] = useState('') 
+    const [newSodaSize, setNewSodaSize] = useState(0)
+
+    const handleSubmit = async (e) => {
+        e.preventDefault() //prevents reload
+
+        // space for firestore functions
+
+        //reset the form
+        setNewSodaName('')
+        setNewSodaSize(0)
+    }
+
+    return(
+        <div>
+            lol
+        </div>
+    )
+}
+```
+
+After this we will build a simple form and add the states and the handle function for the form. There is some simple `inline` styling just to make it a little easier to see when it's rendered.
+
+```jsx
+<form onSubmit={handleSubmit} style={{display:"flex", flexDirection:"column"}}>
+    <span>Add a new soda:</span>
+    <label>
+        Name:
+        <input 
+            required
+            type="text"
+            onChange={(e) => setNewSodaName(e.target.value)}
+            value={newSodaName}
+        />
+    </label>
+    <label>
+        Size:
+        <input 
+            required
+            type="number"
+            onChange={(e) => setNewSodaSize(e.target.value)}
+            value={newSodaSize}
+        />
+    </label>
+    <input type="submit" value="Add Soda" style={{width:"100px", marginTop:"10px"}}/>
+</form>
+```
+
+Then we have our **completed** `handleSubmit` function for adding the documents:
+
+```jsx
+const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    const reference = collection(db, 'sodas')
+
+    // first the collection reference to the db 
+    // then the object we want to save
+    await addDoc(reference, {
+        title: newSodaName,
+        size: newSodaSize
+    })
+
+    setNewSodaName('')
+    setNewSodaSize(0)
+}
+```
+
+As i said before the `collection` is just a reference so the server knows where to put our data, then the `addDoc` just sends it to the collection. And that's it, super easy.
+
+> Most of the code is just for the form and the firebase part is simple. This was all the code for adding the document 😁.
+
+```jsx
+const reference = collection(db, 'sodas')
+
+await addDoc(reference, {
+    title: newSodaName,
+    size: newSodaSize
+})
+```
+
+And now for the final result, should look something like this:
+
+```jsx:/src/components/Form.jsx
+import { useState } from 'react'
+
+// imports from firebase
+import { db } from '../Firebase/config'
+import { collection, addDoc } from 'firebase/firestore'
+
+export default function Form() {
+    const [newSodaName, setNewSodaName] = useState('')
+    const [newSodaSize, setNewSodaSize] = useState(0)
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        const reference = collection(db, 'sodas')
+
+        await addDoc(reference, {
+            title: newSodaName,
+            size: newSodaSize
+        })
+
+        setNewSodaName('')
+        setNewSodaSize(0)
+    }
+
+    return (
+        <form onSubmit={handleSubmit} style={{display:"flex", flexDirection:"column"}}>
+            <span>Add a new soda:</span>
+            <label>
+                Name:
+                <input 
+                    required
+                    type="text"
+                    onChange={(e) => setNewSodaName(e.target.value)}
+                    value={newSodaName}
+                />
+            </label>
+            <label>
+                Size:
+                <input 
+                    required
+                    type="number"
+                    onChange={(e) => setNewSodaSize(e.target.value)}
+                    value={newSodaSize}
+                />
+            </label>
+            <input type="submit" value="Add Soda" style={{width:"100px", marginTop:"10px"}}/>
+        </form>
+    )
+}
+```
+
+And when you want to use this Form in other components, just `import` it into your file of choise. Done easily like this:
+
+```jsx
+import Form from './components/Form'
+//.....
+<Form />
+```
+
+> And that was all for adding documents in Firebase firestore through React.js, well done! All code is on [Github](https://github.com/call-n/example-firebase) and if you want to read about how we delete document click [here](https://calo.dev/blog/delete-docs-firestore) ☺️.

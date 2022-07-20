@@ -1,0 +1,124 @@
+---
+title: How to delete documents in Firestore
+description: This article shows how to code and use Firebase to delete documents from the Firestore database.
+publishedAt: 2022-07-19
+image: /static/images/firestoredelete.webp
+tags: ['Firebase', 'Firestore', 'React.js']
+---
+
+This article shows how to code and use Firebase to delete documents from the Firestore database. This example is in React.js. All code is found on [GitHub](https://github.com/call-n/example-firebase) for reference.
+
+## How to delete documents in Firestore
+
+First of we need fetch the data that we want to delete so I recommend that you read [How to fetch from the database in Firebase](https://calo.dev/blog/firebase-database-fetch) and how you build a custom hook for fetching `real-time` data [here](https://calo.dev/blog/custom-real-time-data-hook).
+
+> When you've done that this should be a breeze 😉.
+
+We start of with the file we used when fetching our data from the custom hook we built:
+
+```jsx:/src/App.js
+import { useCollection } from './hooks/useCollection'
+
+function App() {
+  const { documents: sodas } = useCollection('sodas')
+  
+  console.log(sodas)
+
+  return (
+    <div className="App">
+      lol
+    </div>
+  );
+}
+
+export default App;
+```
+
+There after we import our functions from `firebase/firestore`
+
+```jsx
+// for deleting an document
+import { db } from './Firebase/config'
+import { doc, deleteDoc } from 'firebase/firestore'
+```
+
+The `jsx` we need to render, it's just a `.map` function on the sodas and a onClick event that calls the `handleClick` function:
+
+```jsx
+<div className="App">
+    <ul>
+    {sodas && sodas.map(soda => 
+        <li 
+        key={soda.id} 
+        onClick={() => handleClick(soda.id)}
+        >
+        {soda.title}, {soda.size}
+        </li>
+    )}
+    </ul>
+    <Form />
+</div>
+```
+
+and then the handleClick function that takes a `id` as an argument:
+
+```jsx
+//delete function
+const handleClick = async (id) => {
+    const reference = doc(db, 'sodas', id)
+    await deleteDoc(reference)
+}
+```
+
+`doc` takes 3 arguments, this is our `db` we imported from firebase config, the collection name and the `id` of the document we want.
+
+`deleteDoc` takes 1 argument and that is the reference to the document that you want to be deleted.
+
+This makes our code very simple because we have everything we need already. All the document, their `ids` and the db already imported. So we set up a `handleClick` function for when the user clicks on the element in the `DOM` we run this function and delete the document with the same `id`.
+
+The final version with everything patched together will look something like this:
+
+```jsx:/src/App.js
+// Custom hook for fetching real-time data
+import { useCollection } from './hooks/useCollection'
+
+// for deleting an document
+import { db } from './Firebase/config'
+import { doc, deleteDoc } from 'firebase/firestore'
+
+// Form for creating a new document
+import Form from './components/Form'
+
+function App() {
+  // fetch
+  const { documents: sodas } = useCollection('sodas')
+  
+  console.log(sodas)
+
+  //delete function
+  const handleClick = async (id) => {
+    const reference = doc(db, 'sodas', id)
+    await deleteDoc(reference)
+  }
+
+  return (
+    <div className="App">
+      <ul>
+        {sodas && sodas.map(soda => 
+          <li 
+            key={soda.id} 
+            onClick={() => handleClick(soda.id)}
+          >
+          {soda.title}, {soda.size}
+          </li>
+        )}
+      </ul>
+      <Form />
+    </div>
+  );
+}
+
+export default App;
+```
+
+> And that's it, of course all this code is available on [github](https://github.com/call-n/example-firebase)!
