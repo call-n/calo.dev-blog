@@ -1,0 +1,49 @@
+---
+title: How to setup authentication in Firebase
+description: How to setup Firebase Authentication and links to related articles.
+publishedAt: 2022-07-20
+image: /static/images/firebaseauth.webp
+tags: ['Firebase', 'Firestore', 'React.js', 'Auth']
+---
+
+How to setup Firebase Authentication and links to related articles. This example is in React.js and I recommend that you read [How to setup Firebase in your code](https://calo.dev/blog/firebase-setup-code) before you read this. All code is found on [GitHub](https://github.com/call-n/example-firebase) for reference.
+
+> This is a really short article, this will only contain how to configure your `config.js` file and the links to all the other articles on authentication.
+
+Let's move on, first we have to import the `firebase/auth` module in the `/Firebase/config.js` file with the function `getAuth`. Like this:
+
+```js
+import { getAuth } from 'firebase/auth'
+```
+
+Then all we have to do is to invoke it and export the auth constant we declared:
+
+```js
+// initialise authentication service
+const auth = getAuth()
+
+export { auth }
+```
+
+## Enable Firebase Auth on the cloud
+
+First of we need to navigate to our `console` in the cloud and click on the `Authentication` link in the `Build tab`. When we do that this view pops up:
+
+![Authentication tool page for Firebase](/static/images/authpage.webp)
+
+Then we want to procced by clicking on the `get started` button, after this we will be sent to this screen and we want to choose `Email/Password` for this custom hook.
+
+![Authentication selector page for Firebase](/static/images/authselector.webp)
+
+Then they will ask you to enable this setting and like in the image below just enable the one with `Email/Password` for now. Procced by clicking on the save button then you are all done!
+
+![Authentication selector page for Firebase](/static/images/authenable.webp)
+
+> And that's it! Now the authentication service will be up and running so you can just import the config file anywere in your project to get started.
+
+## All the links to related topic of authentication in Firebase.
+
+- [Signup custom react hook](/blog/firebase-signup-custom-hook)
+- [Logout custom react hook](/blog/firebase-logout-custom-hook)
+- [Login custom react hook](/blog/firebase-login-custom-hook)
+
