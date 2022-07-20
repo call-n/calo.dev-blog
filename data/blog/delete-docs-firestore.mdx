@@ -8,6 +8,8 @@ tags: ['Firebase', 'Firestore', 'React.js']
 
 This article shows how to code and use Firebase to delete documents from the Firestore database. This example is in React.js. All code is found on [GitHub](https://github.com/call-n/example-firebase) for reference.
 
+[Click here to get to final solution](#finished-code)
+
 ## How to delete documents in Firestore
 
 First of we need fetch the data that we want to delete so I recommend that you read [How to fetch from the database in Firebase](https://calo.dev/blog/firebase-database-fetch) and how you build a custom hook for fetching `real-time` data [here](https://calo.dev/blog/custom-real-time-data-hook).
@@ -76,7 +78,9 @@ const handleClick = async (id) => {
 
 This makes our code very simple because we have everything we need already. All the document, their `ids` and the db already imported. So we set up a `handleClick` function for when the user clicks on the element in the `DOM` we run this function and delete the document with the same `id`.
 
-The final version with everything patched together will look something like this:
+The final version with everything patched together will look something like this.
+
+### Finished code
 
 ```jsx:/src/App.js
 // Custom hook for fetching real-time data

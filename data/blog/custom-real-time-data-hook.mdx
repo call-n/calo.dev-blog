@@ -8,6 +8,8 @@ tags: ['Firebase', 'Firestore', 'React.js', 'Custom-Hook']
 
 This article shows how to build a real-time data hook for Firebase and a quick walkthrough what realtime data is. This example is in React.js. All code is found on [GitHub](https://github.com/call-n/example-firebase) for reference.
 
+[Click here to get to final solution](#finished-code)
+
 ## What is real-time data?
 
 Real-time data is pretty simple acually. The data is stored as `JSON` and in a `noSQL` cloud database and the data is synced across all client in realtime. This means that every client that's connected have a direct link to the server and communicates when there is an update in the database. It even remains available if your app goes offline. 
@@ -84,7 +86,9 @@ useEffect(() => {
 }, [])
 ```
 
-After this we should have our finished hook and we are ready to use it, final code:
+After this we should have our finished hook and we are ready to use it.
+
+### Finished code
 
 ```js:/src/hooks/useCollection.js
 import { useState, useEffect } from 'react'

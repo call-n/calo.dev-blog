@@ -8,6 +8,8 @@ tags: ['Firebase', 'Firestore', 'React.js']
 
 This article shows how to code and use Firebase to add documents to the Firestore database. This example is in React.js. All code is found on [GitHub](https://github.com/call-n/example-firebase) for reference.
 
+[Click here to get to final solution](#finished-code)
+
 ## How to add documents in Firestore
 
 We start of with making a form in react, I recommend that you make a new directory called `/compontents`, if it's not already there! In this directory all the compontents of your application should reside.
@@ -127,7 +129,9 @@ await addDoc(reference, {
 })
 ```
 
-And now for the final result, should look something like this:
+And now for the final result, should look something like this.
+
+### Finished code
 
 ```jsx:/src/components/Form.jsx
 import { useState } from 'react'
