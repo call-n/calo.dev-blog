@@ -59,6 +59,7 @@ export default function Footer() {
               <FooterLink href="/blog?filter=Firestore">Firestore</FooterLink>
               <FooterLink href="/blog?filter=Custom-Hook">Custom hooks</FooterLink>
               <FooterLink href="/blog?filter=Auth">Firebase Auth</FooterLink>
+              <FooterLink href="/blog?filter=firestore-rules">Firestore Rules</FooterLink>
             </Flex>
           </GridItem>
         </SimpleGrid>
