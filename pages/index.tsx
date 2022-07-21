@@ -6,6 +6,7 @@ import {
   Text,
   Wrap,
   WrapItem,
+  Button
 } from '@chakra-ui/react';
 import Container from 'components/container';
 import ProjectCard from 'components/project-card';
@@ -46,8 +47,30 @@ export default function HomePage() {
             </Heading>
           </Box>
 
-              <Text fontSize={{ base: 'lg', md: '2xl' }} maxWidth="70ch">Take advantage of the articles that solves both complex and simple problems in mostly Javascipt.</Text>
+              <Text fontSize={{ base: 'lg', md: '2xl' }} maxWidth="70ch" marginBottom="2rem">Take advantage of the articles that solves both complex and simple problems in mostly Javascipt.</Text>
 
+              <Link href={'/blog'}>
+                <Button
+                  minW="10.8rem"
+                  aria-label="All blog articles"
+                  fontWeight="bold"
+                  letterSpacing="wide"
+                  display="inline-flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  textTransform="uppercase"
+                  color="black"
+                  paddingX="10"
+                  paddingY="5"
+                  rounded="lg"
+                  transition="background 0.2s ease-in-out"
+                  bg="sage.base"
+                  _hover={{ bg: 'sage.dark' }}
+                  _active={{ bg: 'sage.darker' }}
+                >
+                  &gt; All blog articles
+                </Button>
+              </Link>
             </Box>
           </Box>
           <Box>

@@ -24,14 +24,13 @@ export default function Page() {
               Review
             </Heading>
             <Text fontSize="lg" maxW="560px">
-              I speak at conferences and events each year. Most of my talks are live coding or demoing
-              sessions which can be scary but fun!
+              lol, comming soon
             </Text>
           </Box>
 
           <Box maxWidth="xl" mt="8">
             <SearchInput
-              placeholder="Search talks"
+              placeholder="Search reviews"
               defaultValue={search.defaultValue}
               onChange={(value) => {
                 search.setParams(value);

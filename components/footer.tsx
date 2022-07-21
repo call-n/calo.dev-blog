@@ -57,7 +57,7 @@ export default function Footer() {
             <Flex direction="column" gap="4">
               <FooterLink href="/blog?filter=Firebase">Firebase</FooterLink>
               <FooterLink href="/blog?filter=Firestore">Firestore</FooterLink>
-              <FooterLink href="/blog?filter=Custom+Hook">Custom hooks</FooterLink>
+              <FooterLink href="/blog?filter=Custom-Hook">Custom hooks</FooterLink>
               <FooterLink href="/blog?filter=Auth">Firebase Auth</FooterLink>
             </Flex>
           </GridItem>
