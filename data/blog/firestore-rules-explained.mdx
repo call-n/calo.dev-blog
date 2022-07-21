@@ -1,0 +1,69 @@
+---
+title: Firestore rules explained
+description: This is an article about how we use the access rules in Firestore to protect our data from unauthorized requests.
+publishedAt: 2022-07-21
+image: /static/images/firestorebanner.webp
+tags: ['Firebase', 'Firestore', 'firestore-rules']
+---
+
+This is an article about how we use the access rules in Firestore to protect our data from unauthorized requests. This is just the basics if you want to read more in depth [click here](/blog?filter=Firestore-Rules).
+
+## Firestore rules explained
+
+First of you need to navigate to the `Firestore database page` under the `Build tab`. Should look something like the image below.
+
+![The firestore database page](/static/images/firestorepage.webp)
+
+When you've done this you would like to click the `Rules tab` in the top left of the page (underneith the Cloud Firestore title). Then this view will pop up as shown in the image below.
+
+![Firestore rules page](/static/images/firestorerulespage.webp)
+
+All these lines may be confusing at first but not to worry, they are accually pretty easy to understand!
+
+```js
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if
+          request.time < timestamp.date(2022, 8, 17);
+    }
+  }
+}
+```
+
+These rules that are above (the once you get when starting in `test mode`) basically tells that anyone that how knows about your database can read/write to it. This may sound very conserning and it should if you are taking a application with firestore to `production`. So let's go through what it means to write firestore rules.
+
+First of we have the rules_version. This is just the version of the rules we are using currently.
+
+```js
+rules_version = '2';
+```
+
+Second line `service cloud.firestore` just tells Firebase what service we are writing the access rules for. This is because we can write rules for other services in Firebase, such as the realtime database.
+
+```js
+service cloud.firestore {
+```
+
+Thrid line `match /databases/{database}/documents` is the start of the rules writing, this is where we match paths to our database. You can see this in the `match` keyword we have in our line. This is just matching request to the path, the `/databases/{database}/documents` part is the path.
+
+This line is always present in your rules but the current path just takes `any` request to your database. The `{}` curlybraces represent a `wildcard` in this context, wildcard meaning `any` database and you may have seen the star `*` being used the same way. 
+
+```js
+match /databases/{database}/documents {
+```
+
+> These three line needs no adjustment but it is still important to know what the mean.
+
+After this line is were we make additional paths with specific rules, meaning if we have a path like sodas that we want anyone to `read` but not `write` we can add specific rules to make that happen. 
+
+But the forth line `match /{document=**}` means that any document in our database will have the following rules. And it's the same here, the curlybraces is a wildcard and it will match a path to `any document` in `any collection`
+
+```js
+match /{document=**} {
+```
+
+And to the two last lines. The fifth line `allow read, write: if` pretty much explains itself, this allows the read, write operations and the `: if` is a simple if statement. The `if` in this case is `request.time < timestamp.date(2022, 8, 17);` our last line and just checks for the current time of the request and if it's later then the `timestamp` we have it blocks the request.
+
+> To read further and get some examples about Firestore rules [click here](/blog?filter=firestore-rules)
